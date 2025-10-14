@@ -137,15 +137,6 @@ export default SourceDocument;
 const componentStyles = {
   descriptionList: ({ euiTheme }: UseEuiTheme) =>
     css({
-      // force the content truncation when "Body cell lines: 1" row height setting is active
-      '.euiDataGridRowCell__content--defaultHeight &': {
-        WebkitLineClamp: 1,
-        display: '-webkit-box',
-        WebkitBoxOrient: 'vertical',
-        height: '100%',
-        overflow: 'hidden',
-      },
-
       // Following guidelines for CSS-in-JS - styles for high granularity components should be assigned to a parent and targeting classes of repeating children
       '.unifiedDataTable__descriptionListTitle': {
         marginInline: '0 0',

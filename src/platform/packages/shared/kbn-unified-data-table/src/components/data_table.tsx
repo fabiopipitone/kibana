@@ -1308,7 +1308,7 @@ const InternalUnifiedDataTable = React.forwardRef<
 
     return (
       <UnifiedDataTableContext.Provider value={unifiedDataTableContextValue}>
-        <span className="unifiedDataTable__inner" css={styles.dataTableInner}>
+        <span className="unifiedDataTable__inner" css={[styles.dataTableInner, oneLineTruncation]}>
           <div
             ref={setDataGridWrapper}
             key={isCompareActive ? 'comparisonTable' : 'docTable'}
@@ -1435,6 +1435,7 @@ const componentStyles = {
       flexDirection: 'column',
       flexWrap: 'nowrap',
       height: '100%',
+
       '.unifiedDataTable__cell--highlight': {
         backgroundColor: euiTheme.colors.backgroundBaseWarning,
       },
@@ -1484,6 +1485,14 @@ const componentStyles = {
         {
           whiteSpace: 'pre-wrap',
         },
+      '& .euiDataGridRowCell__content--defaultHeight, & .euiDataGridRowCell__content--defaultHeight.eui-textTruncate':
+        {
+          WebkitLineClamp: 1,
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          whiteSpace: 'normal',
+        },
     }),
   dataTable: css({
     flexGrow: 1,
@@ -1491,3 +1500,15 @@ const componentStyles = {
     minHeight: 0,
   }),
 };
+
+// force the content truncation when "Body cell lines: 1" row height setting is active
+// we can't define it in above object, because of necessary "!important" usage
+const oneLineTruncation = css`
+  .euiDataGridRowCell__content--defaultHeight {
+    white-space: normal !important;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+    -webkit-line-clamp: 1 !important;
+  }
+`;
