@@ -110,7 +110,7 @@ export default function ({ getService, getPageObjects }: FtrProviderContext) {
       cell = await dataGrid.getCellElementExcludingControlColumns(0, 0);
       content = await cell.findByCssSelector('.unifiedDataTable__cellValue');
       expect(await content.getVisibleText()).to.be(VALUE_WITHOUT_NEW_LINES);
-      expect(await content.getComputedStyle('white-space')).to.be('nowrap');
+      expect(await content.getComputedStyle('white-space')).to.be('normal');
     });
   });
 }
